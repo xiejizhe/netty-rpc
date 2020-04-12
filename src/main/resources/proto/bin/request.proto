@@ -1,0 +1,13 @@
+syntax = "proto3";
+package  message;
+option java_package = "lucky.xjz.rpc.core.message.proto";
+option java_outer_classname = "RequestProto";
+
+message RequestMessage{
+
+  string rpc_version = 1;
+  string id = 2;
+  string method_name = 3;
+  repeated bytes params = 4;
+
+}

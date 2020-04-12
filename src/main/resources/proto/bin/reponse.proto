@@ -1,0 +1,13 @@
+syntax = "proto3";
+package message;
+option java_package = "lucky.xjz.rpc.core.message.proto";
+option java_outer_classname = "ReponseProto";
+
+message ReponseMessage {
+
+    string rpc_version = 1;
+    string id = 2;
+    int32  code = 3;
+    bytes  data = 4;
+
+}

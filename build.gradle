@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+}
+
+group 'StudyNetty'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven{
+        //更换为阿里的仓库
+        url  'http://maven.aliyun.com/nexus/content/groups/public'
+    }
+}
+
+ext{
+
+    slf4jVersion = '1.7.21'
+    log4jVersion = '2.11.0'
+}
+
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    
+    compile "io.netty:netty-all:4.0.30.Final"
+
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+    compile "org.apache.logging.log4j:log4j-core:${log4jVersion}"
+
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl
+
+    compile "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVersion}"
+
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+    compile "org.apache.logging.log4j:log4j-api:${log4jVersion}"
+
+    // https://mvnrepository.com/artifact/com.lmax/disruptor
+    compile group: 'com.lmax', name: 'disruptor', version: '3.4.2'
+
+    
+    compile group: 'com.google.protobuf', name: 'protobuf-java', version: '3.9.0'
+    compile group: 'org.springframework', name: 'spring-context', version: '5.1.5.RELEASE'
+    compile group: 'org.springframework', name: 'spring-core', version: '5.1.5.RELEASE'
+    compile group: 'org.springframework', name: 'spring-beans', version: '5.1.5.RELEASE'
+    compile group: 'org.apache.commons', name: 'commons-compress', version: '1.18'
+    compile group: 'com.madgag.spongycastle', name: 'core', version: '1.58.0.0'
+    compile "com.google.guava:guava:24.1-jre"
+
+}

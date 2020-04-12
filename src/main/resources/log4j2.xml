@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="INFO">
+
+    <properties>
+           <!-- 日志默认存放的位置,这里设置为项目根路径下,也可指定绝对路径 -->
+                <property name="LOG_HOME">${sys:user.dir}</property>
+                <property name="FILE_FOLDER">tcs-consumer-log</property>
+            </properties>
+
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+
+        <!--添加过滤器ThresholdFilter,可以有选择的输出某个级别以上的类别  onMatch="ACCEPT" onMismatch="DENY"意思是匹配就接受,否则直接拒绝  -->
+        <File name="INFO" fileName="${LOG_HOME}/logs/info.log">
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d{yyyy.MM.dd 'at' HH:mm:ss z}] [%-5p] %l - %m%n"/>
+        </File>
+
+        <!--添加过滤器ThresholdFilter,可以有选择的输出某个级别以上的类别  onMatch="ACCEPT" onMismatch="DENY"意思是匹配就接受,否则直接拒绝  -->
+        <File name="ERROR" fileName="${LOG_HOME}/logs/error.log">
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d{yyyy.MM.dd 'at' HH:mm:ss z}] [%-5p] %l - %m%n"/>
+        </File>
+
+        <RollingFile name="RollingFile" fileName="${LOG_HOME}/logs/app.log"
+                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy.MM.dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <SizeBasedTriggeringPolicy size="5 MB" />
+        </RollingFile>
+    </appenders>
+    <loggers>
+        <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+        <logger name="org.springframework" level="INFO"></logger>
+        <logger name="io.netty" level="INFO"></logger>
+        <root level="trace">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFile"/>
+            <appender-ref ref="ERROR"/>
+            <appender-ref ref="INFO"/>
+
+        </root>
+    </loggers>
+</configuration>
